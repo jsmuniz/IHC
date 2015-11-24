@@ -32,7 +32,7 @@
 
 </head>
 
-<body>
+<body id="body">
 
     <div class="container">
         <div class="row">
@@ -42,13 +42,12 @@
                         <h3 class="panel-title">Entrar</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
                             <fieldset>
                                 <div class="form-group">
                                     <input type="number" min="0" step="0" class="form-control" id='cpf' placeholder="CPF" name="cpf" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Senha" name="senha" type="password" value="">
+                                    <input class="form-control" placeholder="Senha" id="senha" type="password" value="">
                                 </div>
                                 <div class="checkbox">
                                     <label>
@@ -56,9 +55,9 @@
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <button id="entrar" class="btn btn-lg btn-success btn-block">Entrar</button>
-				<button type="button" class="btn btn-link" data-toggle="modal" data-target="#forgot">Esqueci a senha</button>
+				                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#forgot">
+                                    Esqueci a senha</button>
                             </fieldset>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -74,13 +73,13 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title text-center">Recuperar Senha</h4>
       </div>
-      <div class="modal-body">
+      <div id="divEmail" class="modal-body">
         <p>Insira o e-mail cadastrado no sistema:</p>
-	<input class="form-control" placeholder="E-mail" name="email" type="text" autofocus>
+	<input id="txtEmail" class="form-control" placeholder="E-mail" name="email" type="text" autofocus>
       </div>
       <div class="modal-footer">
-	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-	<button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#enviado">Enviar</button>
+	<button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+	<button type="button" id="btnEnviar" class="btn btn-success">Enviar</button>
       </div>
     </div>
   </div>
@@ -95,7 +94,7 @@
         <h4 class="modal-title text-center">Sucesso!</h4>
       </div>
       <div class="modal-body">
-        <p class="text-center">E-mail enviado com sucesso.</p>
+        <label id="msgEmail" class="text-center"></label>
       </div>
       <div class="modal-footer">
 	<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
@@ -104,19 +103,86 @@
   </div>
 </div>
 
-
-
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
-<script>
-	$(document).ready(function(){
-
-		$('#entrar').on( "click", function() {
-			console.log($('#entrar').closest('.panel-body').find('#cpf').val());
+    <script>
+	   $(document).ready(function(){
+		$('#entrar').click(function() {
+			var cpf = $('#cpf').val();
+            var senha = $('#senha').val();
+            
+            if(cpf.length == 0 || senha.length == 0) {
+                $('.login-panel').addClass("has-error");
+                $('.control-label').remove()
+                $("#senha").after("<label class='control-label' for='inputError'>Preencha usuário e senha!</label>")
+            }
+            else{
+                var result = validateUser(cpf,senha)
+                if(result) {
+                    window.location = "home" + result + ".html";
+                }
+                else {
+                    $('.login-panel').addClass("has-error");
+                    $('.control-label').remove()
+                    $("#senha").after("<label class='control-label' for='inputError'>Usuário ou senha incorretos!</label>")  
+                }
+            }
 		});
-});
-</script>
+       });
+        
+        $(document).ready(function(e) {
+            $('#btnEnviar').click(function() {
+            var sEmail = $('#txtEmail').val();
+            if ($.trim(sEmail).length == 0) {
+                $("#divEmail").addClass("has-error");
+                $('.control-label').remove()
+                $("#divEmail").append("<label class='control-label' for='inputError'>E-mail inválido</label>");
+                e.preventDefault();
+            }
+            if (validateEmail(sEmail)) {
+                $('#forgot').modal('hide')   
+                $("#msgEmail").text("Sua senha foi enviada para: " + sEmail)
+                $('#enviado').modal('show')
+                $('.control-label').remove()
+                $("#divEmail").removeClass("has-error")
+                $('#txtEmail').val('')
+            }
+            else {
+                $("#divEmail").addClass("has-error")
+                $('.control-label').remove()
+                $("#divEmail").append("<label class='control-label' for='inputError'>E-mail inválido</label>");
+                $('#txtEmail').val('')
+                e.preventDefault();
+            }
+            });
+        });
+        
+        $(document).ready(function(e) {
+            $('#btnCancelar').click(function() {
+                location.reload()
+            });
+        });
+        
+        function validateEmail(email) {
+            var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            return re.test(email);
+        }
+        
+        function validateUser(cpf, senha) {
+            if(cpf == 1 && senha == 1)
+                return 1;
+            if(cpf == 2 && senha == 2)
+                return 2;    
+            if(cpf == 3 && senha == 3)
+                return 3;
+            return false;
+        }
+    </script>
+            
+    <script>
+  
+    </script>
 	
     <!-- Bootstrap Core JavaScript -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
