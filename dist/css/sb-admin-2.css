@@ -32,6 +32,12 @@ body {
     }
 }
 
+#teste {
+    width: auto;
+    height: 7em;
+    background: #D9EDF7;
+}
+
 .navbar-top-links {
     margin-right: 0;
 }
@@ -357,3 +363,13 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+
+.debito{
+    color: red;
+}
+
+.credito{
+    color:blue;
+}
+
+
