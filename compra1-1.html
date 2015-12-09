@@ -10,6 +10,8 @@
     <meta name="author" content="">
 
     <title>iRU - Página do Usuário</title>
+    
+    
 
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -124,17 +126,63 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
+        
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Blank</h1>
+                        <h1 class="page-header">Compra de Tickets</h1>
+                         <h4><a href="home.html">Home</a> >> 
+                             <label font-weight='bold'>Dados da Compra</label>
+                        </h4>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div  id="teste" class="well">
+                            <h4 font-weight='bold'>Passo 1 de 3: Informações do Pedido</h4>
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 33%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-lg-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <label>Detalhes</label>
+                    </div>
+                    <div class="panel-body">
+                        <h4 class="negrito">Quantidade de Tickets:</h4>
+                            <button id="minus" type="button" class="btn btn-danger btn-circle"><i class="fa fa-minus"></i>
+                            </button>
+                            <div class="col-lg-1">
+                                <input type="number" min="0" step="0" class="form-control" id='qtd' placeholder="0" name="qtd" autofocus>
+                            </div>
+                            <button id="plus" type="button" class="btn btn-success btn-circle"><i class="fa fa-plus"></i>
+                            </button>
+                        <br><br>
+                        <h4 class="negrito">Valor:</h4>
+                        <h4 id="valor">R$ 0,00</h4>
+                        
+                            
+                        
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <button id="cancelar" class="btn btn-danger btn-block" data-toggle="modal" data-target="#dialog">Cancelar</button>
+                    </div>
+                    <div class="col-lg-2">
+                    <button id="continuar" class="btn  btn-success btn-block">Continuar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -142,9 +190,77 @@
 
     </div>
     <!-- /#wrapper -->
+    
+    <div id="dialog" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">Cancelar Pedido</h4>
+            </div>
+      <div class="modal-body">
+        <label>Tem Certeza que deseja cancelar o pedido?</label>
+      </div>
+      <div class="modal-footer">
+	<button type="button" id="btnCancelar" class="btn btn-danger">Cancelar</button>
+	<button type="button" id="btnEnviar" class="btn btn-success" data-dismiss="modal">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    
+    <script>
+	   $(document).ready(function(){
+		$('#continuar').click(function() {
+            var number = $('#qtd').val();
+            window.location = "compra2-1.html?value=" + number;
+		});
+       });
+        
+        $(document).ready(function(){
+		$('#btnCancelar').click(function() {
+            window.location = "home.html";
+		});
+       });
+
+        
+        $(document).ready(function(){
+		$('#plus').click(function() {
+            var number = $('#qtd').val();
+            $('#qtd').val(++number);
+            var value = 1.4*number;
+            $('#valor').text("R$ " + value.toFixed(2));
+            
+		});
+       });
+        
+        $(document).ready(function(){
+		$('#minus').click(function() {
+            var number = $('#qtd').val();
+            if(number > 0){
+                $('#qtd').val(--number);
+                var value = 1.4*number;
+                $('#valor').text("R$ " + value.toFixed(2));
+            }
+		});
+       });
+        
+       $(document).ready(function(){
+		$('#qtd').change(function() {
+            var number = $('#qtd').val();
+            if(number < 0)
+                $('#qtd').val(0);
+            else{
+                var value = 1.4*number;
+                $('#valor').text("R$ " + value.toFixed(2));
+            }
+            
+		});
+       });
+    </script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

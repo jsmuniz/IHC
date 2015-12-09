@@ -136,10 +136,10 @@ form {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   background-color: #f9f9f7;
   border: 1px solid #fff;
-  margin: 0 auto 0;
+  margin: 0 740px 0 0;
   left: 0;
   padding: 13px 20px;
-  position: absolute;
+  position: relative;
   width: auto;
 }
 form h2 {
