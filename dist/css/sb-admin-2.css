@@ -376,6 +376,16 @@ table.dataTable thead .sorting:after {
     font-weight: bold;
 }
 
+.logo{
+    margin-top: 100px;
+    margin-bottom: -50px;
+}
+
+.brand{
+    max-width: 30%;
+    margin: 10px 0 0 10px
+}
+
 
 
 
