@@ -3,10 +3,11 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 body {
@@ -35,7 +36,8 @@ body {
 #teste {
     width: auto;
     height: 7em;
-    background: #D9EDF7;
+    background: #337AB7;
+    color: white;
 }
 
 .navbar-top-links {
@@ -145,7 +147,6 @@ body {
         width: 250px;
         margin-top: 51px;
     }
-
     .navbar-top-links .dropdown-messages,
     .navbar-top-links .dropdown-tasks,
     .navbar-top-links .dropdown-alerts {
@@ -264,7 +265,7 @@ table.dataTable thead .sorting:after {
     content: "\f0dc";
     float: right;
     font-family: fontawesome;
-    color: rgba(50,50,50,.5);
+    color: rgba(50, 50, 50, .5);
 }
 
 .btn-circle {
@@ -364,28 +365,35 @@ table.dataTable thead .sorting:after {
     color: #df8a13;
 }
 
-.debito{
+.debito {
     color: red;
 }
 
-.credito{
-    color:blue;
+.credito {
+    color: blue;
 }
 
-.negrito{
+.negrito {
     font-weight: bold;
 }
 
-.logo{
+.logo {
     margin-top: 100px;
     margin-bottom: -50px;
 }
 
-.brand{
+.user {
+    float: right;
+}
+
+.brand {
     max-width: 30%;
     margin: 10px 0 0 10px
 }
 
+.home-table {
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
 
-
-
+.btn-pdf {}
