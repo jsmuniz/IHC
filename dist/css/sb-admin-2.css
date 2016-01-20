@@ -396,4 +396,14 @@ table.dataTable thead .sorting:after {
     margin-bottom: 10px;
 }
 
-.btn-pdf {}
+body.modal-open .container {
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+}
+
+span.glyphicon {
+    font-size: 1.5em;
+}

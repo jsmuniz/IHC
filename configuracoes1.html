@@ -17,6 +17,8 @@
     <!-- MetisMenu CSS -->
     <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
+    <link href="dist/css/bootstrap-slider.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -34,7 +36,7 @@
 
 <body>
 
-    <div id="wrapper">
+    <div id="wrapper" class="container">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -126,22 +128,100 @@
                                 <label>Opções</label>
                             </div>
                             <div class="panel-body">
+                                <label>Habilitar Notificações:</label>
+                                <input type="checkbox" checked>
+                                <br/>
+                                <br/>
+                                <label>Avisar quando saldo estiver abaixo de:</label>
+                                <h4 id='valor'>R$ 10,00</h4>
+                                <br>
+                                <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="10" />
                             </div>
                         </div>
                     </div>
                     <!-- /.col-lg-12 -->
+                    <div class="col-lg-2 col-md-4 col-xs-6">
+                        <button id="cancelar" class="btn btn-primary btn-block" data-toggle="modal" data-target="#dialog">Cancelar</button>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-xs-6">
+                        <button id="Salvar" class="btn  btn-primary btn-block" data-toggle="modal" data-target="#dialogFinalizar">Salvar</button>
+                    </div>
                 </div>
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
 
+    <div id="dialog" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Cancelar Pedido</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Tem Certeza que deseja sair sem salvar?</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCancelar" class="btn btn-primary">Sim</button>
+                    <button type="button" id="btnEnviar" class="btn btn-primary" data-dismiss="modal">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dialogFinalizar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Cancelar Pedido</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Opções Armazenadas com Sucesso!</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+
+
+    <script type='text/javascript' src="js/bootstrap-slider.js"></script>
+
+    <script>
+        $('#ex1').slider();
+
+        $("#ex1").on("slide", function (slideEvt) {
+            $("#valor").text('R$ ' + slideEvt.value + ',00');
+        });
+
+        $(document).ready(function () {
+            $('#btnCancelar').click(function () {
+                window.location = "home1.html";
+            });
+        });
+        $('#dialogFinalizar').on('hidden.bs.modal', function () {
+            window.location = "home1.html";
+        });
+
+        $(document).ready(function () {
+            $('#btnOk').click(function () {
+                window.location = "home1.html";
+            });
+        });
+    </script>
+
+
 
     <!-- Bootstrap Core JavaScript -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
