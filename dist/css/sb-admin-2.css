@@ -154,6 +154,10 @@ body {
     }
 }
 
+#btnOkExtrato {
+    margin-top: 25px;
+}
+
 .btn-outline {
     color: inherit;
     background-color: transparent;

@@ -134,32 +134,36 @@
                             <div class="panel-body">
                                 <div id="teste" class="well">
                                     <div class="form-group">
-                                        <div class="col-lg-2 col-md-4 col-xs-6">
+                                        <div class="col-lg-2 col-md-4 col-xs-3">
                                             <label>Mês</label>
-                                            <select class="form-control">
-                                                <option>Janeiro</option>
-                                                <option>Fevereiro</option>
-                                                <option>Março</option>
-                                                <option>Abril</option>
-                                                <option>Maio</option>
-                                                <option>Junho</option>
-                                                <option>Julho</option>
-                                                <option>Agosto</option>
-                                                <option>Setembro</option>
-                                                <option>Outubro</option>
-                                                <option selected>Novembro</option>
-                                                <option>Dezembro</option>
+                                            <select id="mes" class="form-control">
+                                                <option value="0">Janeiro</option>
+                                                <option value="1" selected>Fevereiro</option>
+                                                <option value="2">Março</option>
+                                                <option value="3">Abril</option>
+                                                <option value="4">Maio</option>
+                                                <option value="5">Junho</option>
+                                                <option value="6">Julho</option>
+                                                <option value="7">Agosto</option>
+                                                <option value="8">Setembro</option>
+                                                <option value="9">Outubro</option>
+                                                <option value="10">Novembro</option>
+                                                <option value="11">Dezembro</option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-xs-6">
+                                        <div class="col-lg-2 col-md-4 col-xs-3">
                                             <label>Ano</label>
-                                            <select class="form-control">
-                                                <option>2011</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option selected>2015</option>
+                                            <select id="ano" class="form-control">
+                                                <option value="0">2011</option>
+                                                <option value="1">2012</option>
+                                                <option value="2">2013</option>
+                                                <option value="3">2014</option>
+                                                <option value="4">2015</option>
+                                                <option value="5" selected>2016</option>
                                             </select>
+                                        </div>
+                                        <div class="col-lg-2 col-md-4 col-xs-3">
+                                            <button type="button" id="btnOkExtrato" class="btn btn-default">Ok</button>
                                         </div>
                                     </div>
                                 </div>
@@ -293,6 +297,39 @@
 
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var ano = $.urlParam('ano');
+            var mes = $.urlParam('mes');
+            if (ano != null && mes != null) {
+                $("select[id$='ano'] option:selected").removeAttr("selected");
+                $("select[id$='mes'] option:selected").removeAttr("selected");
+                $("select[id$='ano'] option:eq(" + ano + ")").attr("selected", "selected");
+                $("select[id$='mes'] option:eq(" + mes + ")").attr("selected", "selected");
+            }
+
+        });
+
+        $.urlParam = function (name) {
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results == null) {
+                return null;
+            } else {
+                return results[1] || 0;
+            }
+        }
+
+        $('#btnOkExtrato').click(function () {
+            var ano = $('#ano').val();
+            var mes = $('#mes').val();
+            window.location = "extrato1.html?ano=" + ano + "&mes=" + mes;
+
+
+
+
+        });
+    </script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
