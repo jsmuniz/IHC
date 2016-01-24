@@ -60,6 +60,9 @@
                             <button id="entrar" class="btn btn-lg btn-primary btn-block">Entrar</button>
                             <button type="button" class="btn btn-link" data-toggle="modal" data-target="#forgot">
                                 Esqueci a senha</button>
+                            <br>
+                            <button type="button" class="btn btn-link" id="help">
+                                Ajuda</button>
                         </fieldset>
                     </div>
                 </div>
@@ -189,6 +192,11 @@
             if (e.which == 13) {
                 $('#entrar').click();
             }
+        });
+
+        $('#help').click(function (e) {
+            e.preventDefault(); //stop the browser from following
+            window.open('files/ajuda.pdf');
         });
     </script>
 

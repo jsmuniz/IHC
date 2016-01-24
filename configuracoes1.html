@@ -81,6 +81,8 @@
                         </li>
                         <li><a href="configuracoes1.html"><i class="fa fa-gear fa-fw"></i> Configurações</a>
                         </li>
+                        <li><a href="#" id="help"><i class="fa fa-question fa-fw"></i>Ajuda</a>
+                        </li>
                         <li class="divider"></li>
                         <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                         </li>
@@ -226,6 +228,11 @@
             $('#btnOk').click(function () {
                 window.location = "home1.html";
             });
+        });
+
+        $('#help').click(function (e) {
+            e.preventDefault(); //stop the browser from following
+            window.open('files/ajuda.pdf');
         });
     </script>
 
