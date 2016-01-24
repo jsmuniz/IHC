@@ -81,7 +81,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="home.html"><i class="fa fa-user fa-fw"></i> Página do Usuário</a>
+                        <li><a href="home1.html"><i class="fa fa-user fa-fw"></i> Página do Usuário</a>
                         </li>
                         <li><a href="configuracoes1.html"><i class="fa fa-gear fa-fw"></i> Configurações</a>
                         </li>
@@ -127,7 +127,7 @@
                     <div class="col-lg-12">
                         <h3 class="page-header">Compra de Tickets</h3>
                         <h5><a href="home1.html">Home</a> >>
-                             <a href="compra1-1.html">Dados do Pedido</a> >>
+                             <a href="" id="pedido">Dados do Pedido</a> >>
                              <label font-weight='bold'>Dados do Pagamento</label>
                         </h5>
                     </div>
@@ -155,8 +155,8 @@
                             <div class="panel-body">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills">
-                                    <li class="active"><a href="#home-pills" data-toggle="tab"> Cartão</a></li>
-                                    <li><a href="#profile-pills" data-toggle="tab">Boleto</a></li>
+                                    <li class="active" id="cartao"><a href="#home-pills" data-toggle="tab"> Cartão</a></li>
+                                    <li id="boleto"><a href="#profile-pills" data-toggle="tab">Boleto</a></li>
                                 </ul>
 
                                 <div class="tab-content">
@@ -165,12 +165,16 @@
 
                                         <div class="col-lg-4 col-md-6 col-xs-9">
                                             <h4>Insira as Informações do Cartão:</h4>
+                                            <div id="error">
+                                            </div>
                                             <div class="demo">
                                                 <form>
                                                     <ul>
                                                         <li>
                                                             <label for="card_number">Número do Cartão </label>
-                                                            <input type="text" name="card_number" id="card_number" placeholder="1234567890123456" maxlength="17">
+                                                            <div id="error1" class="has-error">
+                                                                <input type="text" name="card_number" id="card_number" placeholder="1234 1234 1234 1234" maxlength="16">
+                                                            </div>
                                                         </li>
 
                                                         <li class="vertical">
@@ -208,6 +212,7 @@
                                                         </li>
                                                     </ul>
                                                 </form>
+                                                <p class="log"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -255,22 +260,82 @@
     <script src="js/jquery.maskedinput-1.2.2-co.min.js"></script>
 
     <script>
-        $(document).ready(function () {
-            $('#continuar').click(function () {
-                var number = $('#qtd').val();
-                window.location = "compra2-1.html?value=" + number;
+        var valid = false;
+        var bandeira = "";
+        var method = 1;
+
+        $.urlParam = function (name) {
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results == null) {
+                return null;
+            } else {
+                return results[1] || 0;
+            }
+        }
+
+        $(function () {
+            $('#card_number').validateCreditCard(function (result) {
+                valid = result.valid;
+                bandeira = result.card_type == null ? '-' : result.card_type.name;
             });
         });
 
         $(document).ready(function () {
             $('#btnCancelar').click(function () {
-                window.location = "home.html";
+                window.location = "home1.html";
             });
         });
 
         $(document).ready(function () {
+            $('#boleto').click(function () {
+                method = 2;
+            });
+        });
+
+        $(document).ready(function () {
+            $('#cartao').click(function () {
+                method = 1;
+            });
+        });
+
+        $(document).ready(function () {
+            $('#pedido').click(function () {
+                parent.history.back();
+            });
+        });
+
+        $(document).ready(function (result) {
             $('#continuar').click(function () {
-                window.location = "compra3-1.html";
+                var tudoCerto = true;
+
+                if (method == 1) {
+                    $('#error').empty();
+                    if (!valid) {
+                        tudoCerto = false;
+                        $('#error').append("<label>- Número do Cartão Inválido!</label><br>");
+                    }
+                    if ($('#expiry_date').val().length == 0) {
+                        tudoCerto = false;
+                        $('#error').append("<label>- Validade deve ser Informada!</label><br>");
+                    }
+                    if ($('#cvv').val().length != 3) {
+                        tudoCerto = false;
+                        $('#error').append("<label>- CVV deve conter três dígitos!</label><br>");
+                    }
+                    if ($('#name_on_card').val().length == 0) {
+                        tudoCerto = false;
+                        $('#error').append("<label>- O nome impresso no cartão deve ser informado!</label><br>");
+                    }
+                }
+
+                if (tudoCerto) {
+                    var number = $.urlParam('value');
+                    window.location = "compra3-1.html?value=" + number +
+                        "&method=" + method +
+                        "&bandeira=" + bandeira +
+                        "&card=" + $('#card_number').val();
+                }
+
             });
         });
 

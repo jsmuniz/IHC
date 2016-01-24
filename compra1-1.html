@@ -148,7 +148,8 @@
                             </div>
                             <div class="panel-body">
                                 <h4 class="negrito">Quantidade de Tickets:</h4>
-                                <div class="row">
+                                <label id="error"></label>
+                                <div id="row" class="row">
                                     <div class="col-lg-1 col-md-2 col-xs-3">
                                         <input type="number" min="0" step="0" class="form-control" id='qtd' placeholder="0" name="qtd" autofocus>
                                     </div>
@@ -210,7 +211,12 @@
         $(document).ready(function () {
             $('#continuar').click(function () {
                 var number = $('#qtd').val();
-                window.location = "compra2-1.html?value=" + number;
+                if (number > 0) {
+                    window.location = "compra2-1.html?value=" + number;
+                } else {
+                    $("#error").text("Quantidade de Tickets deve ser maior que zero!");
+                    $('#row').addClass("has-error")
+                }
             });
         });
 
@@ -227,6 +233,8 @@
                 $('#qtd').val(++number);
                 var value = 1.4 * number;
                 $('#valor').text("R$ " + value.toFixed(2));
+                $('#error').text("");
+                $('#row').removeClass("has-error")
 
             });
         });
@@ -234,10 +242,13 @@
         $(document).ready(function () {
             $('#minus').click(function () {
                 var number = $('#qtd').val();
-                if (number > 0) {
+                if (number > 1) {
                     $('#qtd').val(--number);
                     var value = 1.4 * number;
                     $('#valor').text("R$ " + value.toFixed(2));
+                } else {
+                    $('#error').text("Quantidade de Tickets deve ser maior que zero!");
+                    $('#row').addClass("has-error")
                 }
             });
         });
@@ -245,11 +256,15 @@
         $(document).ready(function () {
             $('#qtd').change(function () {
                 var number = $('#qtd').val();
-                if (number < 0)
+                if (number <= 0) {
                     $('#qtd').val(0);
-                else {
+                    $('#error').text("Quantidade de Tickets deve ser maior que zero!");
+                    $('#row').addClass("has-error")
+                } else {
                     var value = 1.4 * number;
                     $('#valor').text("R$ " + value.toFixed(2));
+                    $('#row').removeClass("has-error")
+                    $('#error').text("");
                 }
 
             });
