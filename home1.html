@@ -99,7 +99,15 @@
                             <a href="compra1-1.html"><i class="fa fa-shopping-cart fa-fw"></i> Comprar</a>
                         </li>
                         <li>
-                            <a href="extrato1.html"><i class="fa fa-edit fa-fw"></i> Extrato</a>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i>Extrato<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="extrato1.html"><i class="fa fa-table fa-fw"></i>Utilização</a>
+                                </li>
+                                <li>
+                                    <a href="historico1.html"><i class="fa fa-history fa-fw"></i>Compras</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="configuracoes1.html"><i class="fa fa-wrench fa-fw"></i> Configurações</a>
@@ -310,15 +318,66 @@
     </div>
     <!-- /#wrapper -->
 
+    <div id="dialogComplete" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Pedido em Processamento!</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Seu pedido está em processamento!</label>
+                    <br>
+                    <label>Para consultar o andamento do mesmo, clique abaixo:</label>
+                    <button type="button" id="btnHistorico" class="btn btn-primary center-block">Histórico</button>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
     <script>
+        $.urlParam = function (name) {
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results == null) {
+                return null;
+            } else {
+                return results[1] || 0;
+            }
+        }
+
+        $(document).ready(function () {
+            var value = $.urlParam('value');
+            if (value) {
+                $('#dialogComplete').modal('show');
+            }
+        });
+
+        $(document).ready(function () {
+            $('#btnOk').click(function () {
+                $('#dialogComplete').modal('toggle');;
+            });
+        });
+
+        $(document).ready(function () {
+            $('#btnHistorico').click(function () {
+                window.location = "historico1.html"
+            });
+        });
+
         $(document).ready(function () {
             $('#comprar').click(function () {
                 window.location = "compra1-1.html";
             });
         });
+
 
         $(document).ready(function () {
             $('#extrato').click(function () {

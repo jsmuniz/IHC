@@ -373,6 +373,21 @@ table.dataTable thead .sorting:after {
     color: red;
 }
 
+.cancelled {
+    color: red;
+    margin-right: 15px;
+}
+
+.pending {
+    color: #FFE24F;
+    margin-right: 15px;
+}
+
+.done {
+    color: green;
+    margin-right: 15px;
+}
+
 .credito {
     color: blue;
 }
