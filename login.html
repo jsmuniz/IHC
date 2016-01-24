@@ -54,7 +54,7 @@
                                 <label>
                                     <input name="remember" type="checkbox" value="Lembrar usuário">Lembrar usuário</label </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <button id="entrar" class="btn btn-lg btn-success btn-block">Entrar</button>
+                                <button id="entrar" class="btn btn-lg btn-primary btn-block">Entrar</button>
                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#forgot">
                                     Esqueci a senha</button>
                         </fieldset>
@@ -78,8 +78,8 @@
                         <input id="txtEmail" class="form-control" placeholder="E-mail" name="email" type="text" autofocus>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        <button type="button" id="btnEnviar" class="btn btn-success">Enviar</button>
+                        <button type="button" id="btnCancelar" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" id="btnEnviar" class="btn btn-primary">Enviar</button>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                         <label id="msgEmail" class="text-center"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                     </div>
                 </div>
             </div>
@@ -175,6 +175,18 @@
                     return 3;
                 return false;
             }
+
+            $('#cpf').keypress(function (e) {
+                if (e.which == 13) {
+                    $('#entrar').click();
+                }
+            });
+
+            $('#senha').keypress(function (e) {
+                if (e.which == 13) {
+                    $('#entrar').click();
+                }
+            });
         </script>
 
         <script>
