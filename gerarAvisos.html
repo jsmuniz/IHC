@@ -34,7 +34,7 @@
 
 <body>
 
-    <div id="wrapper">
+    <div id="wrapper" class="container">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -120,30 +120,105 @@
                         <h1 class="page-header">Gerar Avisos</h1>
                     </div>
                     <!-- /.col-lg-12 -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <textarea id="aviso" class="input-lg center-block" style="resize: none; width: 70%"></textarea>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <button class="btn-primary btn center-block"><i class="fa fa-send"></i> Enviar </button>
-                        </div>
-                    </div>
-
                 </div>
-                <!-- /.row -->
+                <div id="notification" class="row">
+                    <div class="col-lg-8 ">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <label>Notificações</label>
+                            </div>
+                            <div class="panel-body">
+                                <label id="error"></label>
+                                <div id="message" class="col-lg-12">
+                                    <textarea id="aviso" class="input-lg center-block" style="resize: none; width: 100%"></textarea>
+                                    <br>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button id="enviar" class="btn-primary btn center-block"><i class="fa fa-send"></i> Enviar </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.container-fluid -->
+            <!-- /.row -->
         </div>
-        <!-- /#page-wrapper -->
-
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
 
+    <div id="dialog" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Enviar Mensagem</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Tem certeza que deseja enviar a mensagem:</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCancelar" class="btn btn-primary">Sim</button>
+                    <button type="button" id="btnEnviar" class="btn btn-primary" data-dismiss="modal">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dialogSuccess" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Sucesso!</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Aviso enviado com sucesso!</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#enviar').click(function () {
+                var msg = $('#aviso').val();
+                if (msg == "") {
+                    $('#error').text("Insira uma mensagem!");
+                } else {
+                    $('.modal-body').append("<br><label>" + msg + "</label>");
+                    $('#dialog').modal("show");
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#btnCancelar').click(function () {
+                $("#dialog").modal("hide");
+                $('.modal-body').empty();
+                $('.modal-body').append("<br><label>Aviso enviado com sucesso!</label>");
+                $("#dialogSuccess").modal("show");
+            });
+        });
+
+        $(document).ready(function () {
+            $('#btnOk').click(function () {
+                window.location = "home3.html";
+            });
+        });
+
+        $('#dialogSuccess').on('hidden.bs.modal', function () {
+            window.location = "home3.html";
+        })
+    </script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -157,6 +232,8 @@
     <script src="bower_components/raphael/raphael-min.js"></script>
     <script src="bower_components/morrisjs/morris.min.js"></script>
     <script src="js/morris-data.js"></script>
+
+
 
 
 </body>
