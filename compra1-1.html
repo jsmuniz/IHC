@@ -162,7 +162,8 @@
                                 <label id="error"></label>
                                 <div id="row" class="row">
                                     <div class="col-lg-1 col-md-2 col-xs-3">
-                                        <input type="number" min="0" step="0" class="form-control" id='qtd' placeholder="0" name="qtd" autofocus>
+                                        <input type="number" min="0" step="0" class="form-control" id='qtd' placeholder="0" name="qtd" maxlength="3" autofocus oninput="maxLengthCheck(this)">
+                                        <!-- FIXME: Quantidade Máxima de Tickets -->
                                     </div>
                                     <div class="col-lg-2 col-md-4 col-xs-5">
                                         <button id="minus" type="button" class="btn btn-info btn-circle"><i class="fa fa-minus"></i>
@@ -176,9 +177,7 @@
                                 <br>
                                 <h4 class="negrito">Valor:</h4>
                                 <h4 id="valor">R$ 0,00</h4>
-
-
-
+                                <!-- CHANGES: Colocar possibilidade de compra por valor -->
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-4 col-xs-6">
@@ -241,11 +240,13 @@
         $(document).ready(function () {
             $('#plus').click(function () {
                 var number = $('#qtd').val();
-                $('#qtd').val(++number);
-                var value = 1.4 * number;
-                $('#valor').text("R$ " + value.toFixed(2));
-                $('#error').text("");
-                $('#row').removeClass("has-error")
+                if (number < 999) {
+                    $('#qtd').val(++number);
+                    var value = 1.4 * number;
+                    $('#valor').text("R$ " + value.toFixed(2));
+                    $('#error').text("");
+                    $('#row').removeClass("has-error")
+                }
 
             });
         });
@@ -285,6 +286,11 @@
             e.preventDefault(); //stop the browser from following
             window.open('files/ajuda.pdf');
         });
+
+        function maxLengthCheck(object) {
+            if (object.value.length > object.maxLength)
+                object.value = object.value.slice(0, object.maxLength)
+        }
     </script>
 
     <!-- Bootstrap Core JavaScript -->
