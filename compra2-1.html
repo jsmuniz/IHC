@@ -227,6 +227,7 @@
                                                 <p class="log"></p>
                                             </div>
                                         </div>
+                                        <label>Cartões Aceitos:</label>
                                     </div>
                                     <div class="tab-pane fade" id="profile-pills">
                                         <h4><br>Seu boleto será enviado por e-mail após finalização do pedido!</h4>
@@ -322,6 +323,9 @@
                 var tudoCerto = true;
 
                 if (method == 1) {
+                    var expiryDate = $('#expiry_date').val();
+                    var values = expiryDate.split('/');
+
                     $('#error').empty();
                     if (!valid) {
                         tudoCerto = false;
@@ -330,6 +334,14 @@
                     if ($('#expiry_date').val().length == 0) {
                         tudoCerto = false;
                         $('#error').append("<label>- Validade deve ser Informada!</label><br>");
+                    }
+                    if (values[0] == 0 || values[0] > 12) {
+                        tudoCerto = false;
+                        $('#error').append("<label>- Mês da Validade Incorreto!</label><br>");
+                    }
+                    if (values[1] == 0 || values[1] < 16) {
+                        tudoCerto = false;
+                        $('#error').append("<label>- Ano da Validade Incorreto!</label><br>");
                     }
                     if ($('#cvv').val().length != 3) {
                         tudoCerto = false;
