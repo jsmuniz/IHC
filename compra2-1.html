@@ -227,13 +227,18 @@
                                                 <p class="log"></p>
                                             </div>
                                         </div>
+
                                         <label>Cartões Aceitos:</label>
+                                        <img src="images/cards.jpg" class="img-responsive cards">
+
                                     </div>
                                     <div class="tab-pane fade" id="profile-pills">
                                         <h4><br>Seu boleto será enviado por e-mail após finalização do pedido!</h4>
                                     </div>
-                                    <!-- TODO: Adicionar Bandeira de Cartoes aceitos -->
-                                    <!-- TODO: Mostrar Valor e Quantidade de Tickets Compradas -->
+                                    <br>
+                                    <div class="value">
+                                        <h4 id="valor" class="negrito">Valor:</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -298,6 +303,9 @@
             $('#btnCancelar').click(function () {
                 window.location = "home1.html";
             });
+
+            var number = $.urlParam('value');
+            $('#valor').append("<br><h4>R$ " + (1.4 * number).toFixed(2) + "</h4>");
         });
 
         $(document).ready(function () {
