@@ -428,6 +428,11 @@
         height: auto;
     }
 
+    .center {
+        margin: 0 auto;
+        width: 60%;
+    }
+
     span.glyphicon {
         font-size: 1.5em;
     }

@@ -81,6 +81,8 @@
                         </li>
                         <li><a href="#" id="help"><i class="fa fa-question fa-fw"></i>Ajuda</a>
                         </li>
+                        <li><a href="#" id="chat"><i class="fa fa-bullhorn fa-fw"></i>Fale Conosco</a>
+                        </li>
                         <li class="divider"></li>
                         <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                         </li>
@@ -215,6 +217,54 @@
                     </div>
                 </div>
 
+                <!-- Modal Fale Conosco-->
+                <div id="fale" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title text-center">Fale Conosco!</h4>
+                            </div>
+                            <div id="divEmail" class="modal-body">
+                                <p>Algum problema? Nos Mande uma Mensagem!</p>
+                                <label>Opção:</label>
+                                <select id="opcao" class="form-control">
+                                    <option value="0" selected>Dúvida</option>
+                                    <option value="1">Reclamação</option>
+                                    <option value="2">Sugestão</option>
+                                    <option value="2">Outro</option>
+                                </select>
+                                <div id="messageBox">
+                                    <label>Mensagem:</label>
+                                    <textarea id="msg" class="input-lg center-block" style="resize: none; width: 100%"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnCancelar" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" id="btnEnviar" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sucesso" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title text-center">Sucesso!</h4>
+                            </div>
+                            <div id="divEmail" class="modal-body">
+                                <label>Mensagem enviada!</label>
+                                <p>Retornaremos assim que possível!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnCancelar" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- jQuery -->
                 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -271,6 +321,30 @@
                     $('#help').click(function (e) {
                         e.preventDefault(); //stop the browser from following
                         window.open('files/ajuda.pdf');
+                    });
+
+                    $(document).ready(function () {
+                        $('#chat').click(function () {
+                            $('#fale').modal('show');;
+                        });
+                    });
+
+                    $(document).ready(function (e) {
+                        $('#btnEnviar').click(function () {
+                            var text = $('#msg').val();
+                            if (text.length == 0) {
+                                $("#messageBox").addClass("has-error");
+                                $('.control-label').remove()
+                                $("#messageBox").append("<label class='control-label' for='inputError'>Insira uma Mensagem!</label>");
+                                e.preventDefault();
+                            } else {
+                                $('#fale').modal('hide');
+                                $('#sucesso').modal('show');
+                                $('.control-label').remove()
+                                $("#messageBox").removeClass("has-error")
+                                $('#msg').val('')
+                            }
+                        });
                     });
                 </script>
 

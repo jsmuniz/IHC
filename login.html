@@ -52,17 +52,22 @@
                                 <label>Senha:</label>
                                 <input class="form-control" id="senha" type="password" value="">
                             </div>
+                            <button type="button" class="btn btn-link right" data-toggle="modal" data-target="#forgot">
+                                Esqueci a senha</button>
                             <div class="checkbox">
                                 <label>
                                     <input name="remember" type="checkbox" value="Lembrar usuário">Lembrar usuário</label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
                             <button id="entrar" class="btn btn-lg btn-primary btn-block">Entrar</button>
-                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#forgot">
-                                Esqueci a senha</button>
+
                             <br>
-                            <button type="button" class="btn btn-link" id="help">
-                                Ajuda</button>
+                            <div class="center">
+                                <button type="button" class="btn btn-link" id="help">
+                                    Ajuda</button>
+                                <button type="button" class="btn btn-link" id="chat">
+                                    Fale Conosco</button>
+                            </div>
                         </fieldset>
                     </div>
                 </div>
@@ -104,6 +109,61 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Fale Conosco-->
+    <div id="fale" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Fale Conosco!</h4>
+                </div>
+                <div id="divForm" class="modal-body">
+                    <label>Algum problema? Nos Mande uma Mensagem!</label>
+                    <label>Nome: </label>
+                    <input id="nome" class="form-control" placeholder="Nome Completo" name="nome" type="text" autofocus>
+                    </label>
+                    <div class="inputEmail">
+                        <label>E-mail:</label>
+                        <input id="txtEmail2" class="form-control" placeholder="E-mail" name="email" type="text" autofocus>
+                    </div>
+                    <label>Opção:</label>
+                    <select id="opcao" class="form-control">
+                        <option value="0" selected>Dúvida</option>
+                        <option value="1">Reclamação</option>
+                        <option value="2">Sugestão</option>
+                        <option value="2">Outro</option>
+                    </select>
+                    <label>Mensagem:</label>
+                    <textarea id="msg" class="input-lg center-block" style="resize: none; width: 100%"></textarea>
+                    <div id="messageBox">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCancelar" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnEnviar2" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sucesso" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Sucesso!</h4>
+                </div>
+                <div id="divEmail" class="modal-body">
+                    <label>Mensagem enviada!</label>
+                    <p>Retornaremos assim que possível!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCancelar" class="btn btn-primary" data-dismiss="modal">Ok</button>
                 </div>
             </div>
         </div>
@@ -197,6 +257,54 @@
         $('#help').click(function (e) {
             e.preventDefault(); //stop the browser from following
             window.open('files/ajuda.pdf');
+        });
+
+        $(document).ready(function () {
+            $('#chat').click(function () {
+                $('#fale').modal('show');;
+            });
+        });
+
+        $(document).ready(function (e) {
+            $('#btnEnviar2').click(function () {
+                var text = $('#msg').val();
+                var email = $('#txtEmail2').val();
+                var nome = $('#nome').val();
+                var tudoCerto = true;
+                $('#messageBox').empty();
+                if (text.length == 0) {
+                    $("#messageBox").addClass("has-error");
+                    $("#messageBox").append("<label class='control-label' for='inputError'>Insira uma Mensagem!</label> <br>");
+                    tudoCerto = false;
+                }
+                if (email.length == 0) {
+                    $("#messageBox").addClass("has-error");
+                    $("#messageBox").append("<label class='control-label' for='inputError'>Insira um E-mail!</label> <br>");
+                    tudoCerto = false;
+                } else {
+
+                    if (!validateEmail(email)) {
+                        $("#messageBox").addClass("has-error");
+                        $("#messageBox").append("<label class='control-label' for='inputError'>E-mail inválido!</label> <br>");
+                        tudoCerto = false;
+                    }
+                }
+
+                if (nome.length == 0) {
+                    $("#messageBox").addClass("has-error");
+                    $("#messageBox").append("<label class='control-label' for='inputError'>Insira seu nome!</label> <br>");
+                    tudoCerto = false;
+                }
+
+                if (tudoCerto) {
+                    $('#fale').modal('hide');
+                    $('#sucesso').modal('show');
+                    $('.control-label').remove()
+                    $("#messageBox").removeClass("has-error")
+                    $('#msg').val('')
+                }
+
+            });
         });
     </script>
 
