@@ -120,7 +120,7 @@
                         <h1 class="page-header">Administração</h1>
                     </div>
                     <!-- /.col-lg-12 -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <label font-weight="bold">Renda do Dia</label>
@@ -129,47 +129,208 @@
                                 <h3>R$ 2.894,80</h3>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <label font-weight="bold">Numéro Refeições Servidas Hoje</label>
+                                <label font-weight="bold">Número Refeições Servidas Hoje</label>
                             </div>
                             <div class="panel-body">
                                 <h3> 1.835 Refeições</h3>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-12">
                         <a href="relatorios.html" class="btn btn-primary"> Ver Mais Relatórios </a>
                     </div>
 
+                    <div class="col-lg-8">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <label font-weight="bold">Cardápio Semanal</label>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Dia</th>
+                                                <th>Arroz</th>
+                                                <th>Feijão</th>
+                                                <th>Carne</th>
+                                                <th>Salada</th>
+                                                <th>Sobremessa</th>
+                                                <th>Alterar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>22/02</td>
+                                                <td>Branco</td>
+                                                <td>Preto</td>
+                                                <td>Frango Assado</td>
+                                                <td>Alface</td>
+                                                <td>Banana</td>
+                                                <td>
+                                                    <button onclick="cadastrarCardapio()" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>23/02</td>
+                                                <td>Branco</td>
+                                                <td>Preto</td>
+                                                <td>Frango Assado</td>
+                                                <td>Alface</td>
+                                                <td>Banana</td>
+                                                <td>
+                                                    <button onclick="cadastrarCardapio()" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>24/02</td>
+                                                <td>Branco</td>
+                                                <td>Preto</td>
+                                                <td>Frango Assado</td>
+                                                <td>Alface</td>
+                                                <td>Banana</td>
+                                                <td>
+                                                    <button onclick="cadastrarCardapio()" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>25/02</td>
+                                                <td>Branco</td>
+                                                <td>Preto</td>
+                                                <td>Frango Assado</td>
+                                                <td>Alface</td>
+                                                <td>Banana</td>
+                                                <td>
+                                                    <button onclick="cadastrarCardapio()" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>26/02</td>
+                                                <td>Branco</td>
+                                                <td>Preto</td>
+                                                <td>Frango Assado</td>
+                                                <td>Alface</td>
+                                                <td>Banana</td>
+                                                <td>
+                                                    <button onclick="cadastrarCardapio()" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>27/02</td>
+                                                <td>Branco</td>
+                                                <td>Preto</td>
+                                                <td>Frango Assado</td>
+                                                <td>Alface</td>
+                                                <td>Banana</td>
+                                                <td>
+                                                    <button onclick="cadastrarCardapio()" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>28/02</td>
+                                                <td>Branco</td>
+                                                <td>Preto</td>
+                                                <td>Frango Assado</td>
+                                                <td>Alface</td>
+                                                <td>Banana</td>
+                                                <td>
+                                                    <button onclick="cadastrarCardapio()" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="cadastroCardapio.html?var=1" class="btn btn-primary">Inserir Cardápio </a>
+                    </div>
+
+                    <!-- /.row -->
                 </div>
-                <!-- /.row -->
+                <!-- /.container-fluid -->
             </div>
-            <!-- /.container-fluid -->
+            <!-- /#page-wrapper -->
+
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /#wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+        <div id="addCardapio" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-center">Alterar Cardápio</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-group">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label for="data">Dia </label>
+                                    <input id="data" class="input-sm" type="date">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="data"> Arroz</label>
+                                    <input id="arroz" value="Branco" class="input-sm" type="text">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="data"> Feijão</label>
+                                    <input id="feijao" value="Preto" class="input-sm" type="text">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label for="data">Carne </label>
+                                    <input id="carne" value="Frango Assado" class="input-sm" type="text">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="data"> Salada</label>
+                                    <input id="salada" value="Alface" class="input-sm" type="text">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="data"> Sobremesa</label>
+                                    <input id="sobremesa" value="Banana" class="input-sm" type="text">
+                                </div>
+                            </div>
 
-    <!-- jQuery -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnCancelar" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" id="btnEnviar" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- jQuery -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="dist/js/sb-admin-2.js"></script>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-    <script src="bower_components/raphael/raphael-min.js"></script>
-    <script src="bower_components/morrisjs/morris.min.js"></script>
-    <script src="js/morris-data.js"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="dist/js/sb-admin-2.js"></script>
+
+        <script src="bower_components/raphael/raphael-min.js"></script>
+        <script src="bower_components/morrisjs/morris.min.js"></script>
+        <script src="js/morris-data.js"></script>
+        <script>
+            function cadastrarCardapio() {
+                $('#addCardapio').modal('show');
+            }
+        </script>
 
 
 </body>
